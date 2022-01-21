@@ -1,4 +1,4 @@
-package banco;
+package bancoDominio;
 
 public abstract class Conta implements iConta{
 	
@@ -8,8 +8,6 @@ public abstract class Conta implements iConta{
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
-	
-	
 	
 	
 	public Conta(Cliente novoCliente) { 

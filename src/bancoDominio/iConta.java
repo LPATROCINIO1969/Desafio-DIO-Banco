@@ -1,4 +1,4 @@
-package banco;
+package bancoDominio;
 
 public interface iConta {
 	

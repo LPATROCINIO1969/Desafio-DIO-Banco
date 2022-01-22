@@ -90,7 +90,7 @@ public class Banco {
 	
 	public String listaAgencias() {
 		String texto = "";
-		texto += this.toString() + " (Número de agências: " + this.getNumeroAgencias() + ")\n";
+		texto += String.format("%-40s",this.toString()) + " (Número de agências: " + this.getNumeroAgencias() + ")\n";
 
 		if(agencias.isEmpty()) return texto; 
 		

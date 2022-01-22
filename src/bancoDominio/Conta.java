@@ -2,23 +2,34 @@ package bancoDominio;
 
 public abstract class Conta implements iConta{
 	
-	private static final int AGENCIA_PADRAO = 1;
+//	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
-	protected int agencia;
+	protected Agencia agencia;
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
+	protected int tipoConta;
 	
+		
+//	public Conta(Cliente novoCliente) { 
+//		this.agencia = AGENCIA_PADRAO;
+//		this.numero = SEQUENCIAL++; 
+//		this.saldo = 0; 
+//		this.cliente = novoCliente;
+//	}
 	
-	public Conta(Cliente novoCliente) { 
-		this.agencia = AGENCIA_PADRAO;
+	public Conta(Cliente novoCliente, Agencia agencia) { 
+		this.agencia = agencia;
 		this.numero = SEQUENCIAL++; 
 		this.saldo = 0; 
 		this.cliente = novoCliente;
+		this.tipoConta=0;
+		this.agencia.addConta(this);
+		
 	}
 	 
 
-	public int getAgencia() {
+	public Agencia getAgencia() {
 		return agencia;
 	}
 
@@ -28,6 +39,10 @@ public abstract class Conta implements iConta{
 
 	public double getSaldo() {
 		return saldo;
+	}
+	
+	public int getTipoConta() {
+		return this.tipoConta;
 	}
 
 	@Override
@@ -49,8 +64,15 @@ public abstract class Conta implements iConta{
 		
 	}
 	
+		
+	@Override
+	public String toString() {
+		return ("Conta " + this.getNumero() + " - " + this.cliente.getNome() + "Tipo: " + this.getTipoConta());
+	}
+
+
 	protected void imprimirInfComum() {
-		System.out.println(String.format("Agencia: %d",this.agencia));
+		System.out.println(String.format("Agencia: %d",this.agencia.getNumero()));
 		System.out.println(String.format("Conta: %d",this.numero));
 		System.out.println(String.format("Titular: %s",this.cliente.getNome()));
 		System.out.println(String.format("Saldo: %.2f",this.saldo));

@@ -20,7 +20,21 @@ public class SistemaBancario {
 		this.clientes = new TreeSet<>();
 		this.numBancos = 0;
 	}
+	
+	// Retorna iterator de lista de bancos
+	public Iterator<Banco> getIteratorListaBanco(){
+		Iterator<Banco> it = bancos.iterator();
+		return it;
+	}
+	
+	// Retorna iterator de lista de clientes
+	public Iterator<Cliente> getIteratorListaClientes(){
+		Iterator<Cliente> it = clientes.iterator();
+		return it;
+	}
 
+	
+	
 	// Adiciona um banco na listagem de bancos do sistema bancário
 	public void addBanco(Banco novoBanco) {
 		this.bancos.add(novoBanco);
@@ -34,6 +48,12 @@ public class SistemaBancario {
 		this.numBancos--;
 	}
 	
+	// Remove um banco da listagem de bancos do sistema bancário
+	private void removeCliente(Cliente cliente) {
+		this.clientes.remove(cliente);
+		this.numClientes--;
+	}
+	
 	
 	// Adiciona um cliente ao sistema bancário
 	public void addCliente(Cliente cliente) {
@@ -41,8 +61,29 @@ public class SistemaBancario {
 		this.numClientes++;
 	}
 	
+	public Banco getBanco(int codigo) {
+		Iterator<Banco> it = bancos.iterator();
+		Banco banco;
+		if (bancos.isEmpty()) return null;
+		while (it.hasNext()) {
+			banco = it.next();
+			if (banco.getNumero()==codigo) return banco;
+		}
+		return null;
+	}
 
-
+	public Cliente getCliente(String codigo) {
+		Iterator<Cliente> it = clientes.iterator();
+		Cliente cliente;
+		if (clientes.isEmpty()) return null;
+		while (it.hasNext()) {
+			cliente = it.next();
+			if (cliente.getIdentificador().equals(codigo)) return cliente;
+		}
+		return null;
+	}
+	
+	
 	// Remove um banco da listagem de bancos por meio de pesquisa do "número do banco"
 	public void removeBanco(int numeroBanco) {
 		Banco banco;
@@ -74,7 +115,35 @@ public class SistemaBancario {
 		}
 	
 	}
-
+	
+	// Remove um cliente da listagem de clientes por meio de pesquisa do "identificador"
+	public void removeCliente(String numero) {
+		Cliente cliente;
+		if (!clientes.isEmpty()){
+			Iterator<Cliente> it = this.clientes.iterator();
+			
+			while(it.hasNext()) {	
+				cliente = it.next();
+				if (cliente.getIdentificador().equals(numero)) {
+					this.removeCliente(cliente);
+					break;
+				}
+			}
+					
+		}
+	}
+	
+	// Encontra uma determinada agência no sistema bancario
+	public Agencia encontraAgencia(int codigo) {
+		Agencia agencia = null;
+		for (Banco banco:bancos) {
+			agencia = banco.getAgencia(codigo);
+			if (agencia!=null) break;
+		}
+		return agencia;
+	}
+	
+	
 	
 	// Apresenta o número de bancos cadastrados no sistema bancário
 	public int getNumeroBancos() {
@@ -95,7 +164,7 @@ public class SistemaBancario {
 			// Verifica se a listagem de bancos está vazia
 			if(bancos.isEmpty()) return "Este sistema bancário ainda não possui bancos cadastrados."; 
 			
-			texto += "Sistema Bancário: \n";
+			texto += "\nSistema Bancário - Lista de Bancos \n";
 			for(Banco banco:bancos) {
 				texto+=banco.toString() + "\n";
 			}
@@ -122,8 +191,8 @@ public class SistemaBancario {
 			
 			if(clientes.isEmpty()) return "Este sistema bancário ainda não possui clientes cadastrados."; 
 			
-			texto += "Clientes do Sistema Bancário\n";
-			for(Cliente cliente:clientes) texto += cliente.toString() + "\n";
+			texto += "\nClientes do Sistema Bancário\n";
+			for(Cliente cliente:clientes) texto += cliente.toString().toUpperCase() + "\n";
 				
 			texto+= "Total de Clientes: " + this.getNumClientes() + "\n";
 			

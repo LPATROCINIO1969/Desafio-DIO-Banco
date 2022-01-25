@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Banco {
+public class Banco implements Comparable<Banco>{
 	private String nome;
 	private int numero;
 	private List<Agencia> agencias;
@@ -83,6 +83,15 @@ public class Banco {
 		this.numero = numBanco;
 	}
 	
+	public Agencia getAgencia(int codigo) {
+		for (Agencia agencia:this.agencias) {
+			if (agencia.getNumero()== codigo)return agencia;
+		}
+		
+		return null;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return ">\t " +  numero + "\t -  Banco: " + nome;
@@ -99,5 +108,18 @@ public class Banco {
 		}
 		return texto;
 	}
+
+	@Override
+	public int compareTo(Banco outroBanco) {
+		if (this.getNumero() > outroBanco.getNumero()) return 1;
+		else if (this.getNumero() < outroBanco.getNumero()) return -1;
+		return 0;
+	}
+	
+	// Retorna iterator de lista de agencias
+		public Iterator<Agencia> getIteratorListaAgencia(){
+			Iterator<Agencia> it = agencias.iterator();
+			return it;
+		}
 	
 }

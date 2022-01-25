@@ -12,6 +12,7 @@ public class Agencia {
 	private int numero;
 	private List<Conta> contas;
 	private int qtdContas;
+	private Banco banco;
 	
 	
 	public Agencia() {
@@ -19,10 +20,11 @@ public class Agencia {
 		this.qtdContas= 0;
 	}
 	
-	public Agencia(String nome, int numero) {
+	public Agencia(String nome, int numero, Banco banco) {
 		this();
 		this.nome = nome;
 		this.numero = numero;
+		this.banco = banco;
 	}
 	
 	
@@ -53,6 +55,9 @@ public class Agencia {
 	}
 	
 
+	
+
+	
 	public String getNome() {
 		return nome;
 	}
@@ -62,7 +67,11 @@ public class Agencia {
 	}
 
 	public int getNumero() {
-		return numero;
+		return this.numero;
+	}
+	
+	public Banco getBanco() {
+		return this.banco;
 	}
 
 	public void setNumero(int numero) {
@@ -93,9 +102,6 @@ public class Agencia {
 		return texto;
 	}
 	
-		
-	
-	
-	
+
 	
 }

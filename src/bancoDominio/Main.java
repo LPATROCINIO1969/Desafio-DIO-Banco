@@ -1,5 +1,8 @@
 package bancoDominio;
 
+import java.util.Scanner;
+import bancoGUI.*;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -7,12 +10,21 @@ public class Main {
 		// Popular o sistema 
 		
 		SistemaBancario sistema = new SistemaBancario();
+		inicializandoBanco(sistema);
+		GestaoMenus menus = new GestaoMenus(sistema);
+		menus.exibeMenuSistemaBancario();
 		
-		Banco banco1 = new Banco("Santander", 109);
+		
+	}
+	
+	private static void inicializandoBanco(SistemaBancario sistema) {
+
+		
+		Banco banco1 = new Banco("SANTANDER", 109);
 		sistema.addBanco(banco1);
-		Agencia agencia1= new Agencia("Praia da Costa", 1090);
-		Agencia agencia2= new Agencia("Centro", 1091);
-		Agencia agencia3= new Agencia("Ibes", 1092);
+		Agencia agencia1= new Agencia("Praia da Costa", 1090,banco1);
+		Agencia agencia2= new Agencia("Centro", 1091,banco1);
+		Agencia agencia3= new Agencia("Ibes", 1092,banco1);
 		banco1.addAgencia(agencia1);
 		banco1.addAgencia(agencia2);
 		banco1.addAgencia(agencia3);
@@ -26,17 +38,15 @@ public class Main {
 		Conta conta2 = new ContaPoupanca(cliente2,agencia2);
 		Conta conta3 = new ContaCorrente(cliente3,agencia1);
 		Conta conta4 = new ContaPoupanca(cliente2,agencia3);
-		System.out.println(agencia1.listaContas());
-		System.out.println(agencia2.listaContas());
-		System.out.println(agencia3.listaContas());
 		
 		
 		
-		banco1 = new Banco("Banco do Brasil", 100);
+		
+		banco1 = new Banco("BANCO DO BRASIL", 100);
 		sistema.addBanco(banco1);
-		agencia1= new Agencia("Jardim America", 1000);
-		agencia2= new Agencia("Praia do Suá", 1001);
-		agencia3= new Agencia("Terra Vermelha", 1002);
+		agencia1= new Agencia("Jardim America", 1000,banco1);
+		agencia2= new Agencia("Praia do Suá", 1001,banco1);
+		agencia3= new Agencia("Terra Vermelha", 1002,banco1);
 		banco1.addAgencia(agencia1);
 		banco1.addAgencia(agencia2);
 		banco1.addAgencia(agencia3);
@@ -50,30 +60,10 @@ public class Main {
 		conta2 = new ContaPoupanca(cliente2,agencia2);
 		conta3 = new ContaCorrente(cliente3,agencia1);
 		conta4 = new ContaPoupanca(cliente2,agencia3);
-		System.out.println(agencia1.listaContas());
-		System.out.println(agencia2.listaContas());
-		System.out.println(agencia3.listaContas());
-		
-		
-//		System.out.println(sistema.listaBancos());
-//		System.out.println(sistema.listaBancosAgencias());
-//		System.out.println(sistema.listaClientes());
-		
-		
-
-		/*ystem.out.println(sistema.listaBancosAgencias());
-		novoBanco.removeAgencia(1090);
-		System.out.println(sistema.listaBancosAgencias());
-		
-		// Teste de remoção do banco da lista de bancos do sistema bancário
-		sistema.removeBanco(100);
-		System.out.println(sistema.listaBancos());
-		sistema.removeBanco("Santander");
-		System.out.println(sistema.listaBancos());*/
-		
 		
 	}
-	
-	
 
 }
+	
+
+

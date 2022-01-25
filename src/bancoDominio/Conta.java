@@ -1,22 +1,18 @@
 package bancoDominio;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public abstract class Conta implements iConta{
 	
-//	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
 	protected Agencia agencia;
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
 	protected int tipoConta;
-	
-		
-//	public Conta(Cliente novoCliente) { 
-//		this.agencia = AGENCIA_PADRAO;
-//		this.numero = SEQUENCIAL++; 
-//		this.saldo = 0; 
-//		this.cliente = novoCliente;
-//	}
+	protected List<Transacao> transacoes;
 	
 	public Conta(Cliente novoCliente, Agencia agencia) { 
 		this.agencia = agencia;
@@ -25,6 +21,7 @@ public abstract class Conta implements iConta{
 		this.cliente = novoCliente;
 		this.tipoConta=0;
 		this.agencia.addConta(this);
+		this.transacoes = new ArrayList<>();
 		
 	}
 	 
@@ -47,12 +44,14 @@ public abstract class Conta implements iConta{
 
 	@Override
 	public void sacar(double valorSacado) {
+		this.transacoes.add(new Transacao("Saque", valorSacado,true, new Date()));
 		saldo = saldo - valorSacado;
 		
 	}
 
 	@Override
 	public void depositar(double valorDepositado) {
+		this.transacoes.add(new Transacao("Depósito", valorDepositado,false, new Date()));
 		saldo = saldo + valorDepositado;
 		
 	}

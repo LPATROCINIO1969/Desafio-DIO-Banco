@@ -143,7 +143,17 @@ public class SistemaBancario {
 		return agencia;
 	}
 	
-	
+	public Conta encontraConta(int codigo) {
+		Iterator<Agencia> it;
+		for(Banco bc:this.bancos) {
+			for(Agencia ag:bc.getAgencias()) {
+				for (Conta ct:ag.getContas()) {
+					if (ct.getNumero()==codigo) return ct;
+				}
+			}
+		}
+		return null;
+	}
 	
 	// Apresenta o número de bancos cadastrados no sistema bancário
 	public int getNumeroBancos() {
@@ -198,6 +208,24 @@ public class SistemaBancario {
 			
 			return texto;
 		}
+		
+		public String listaContas() {
+			String texto="";
+			Iterator<Agencia> itAgencia;
+			Agencia agencia;
+			for(Banco banco:bancos) {
+				texto+=banco.toString() +"\n";
+				itAgencia = banco.getIteratorListaAgencia();
+				while(itAgencia.hasNext()) {
+					agencia = itAgencia.next();
+					texto += agencia.listaContas();
+				}
+			
+			}
+			
+			return texto;
+		}
+		
 		
 	
 }

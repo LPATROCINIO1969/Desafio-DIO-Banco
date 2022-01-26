@@ -121,7 +121,7 @@ public class GestaoMenus {
 			exibeMenuGerenciarAgencias();
 			break;
 		case 4: 
-			// to do
+			exibeMenuGerenciarContas();
 			break;
 		case 5:
 			return;
@@ -248,7 +248,7 @@ public class GestaoMenus {
 		
 		switch (opcao) {
 		case 1:
-			BancoGUI.criarNovoBanco(sistema);
+			BancoGUI.criarNovo(sistema);
 			break;
 		case 2:
 			System.out.println(sistema.listaBancos());
@@ -257,13 +257,13 @@ public class GestaoMenus {
 			leitura.nextLine();
 			break;
 		case 3: 
-			BancoGUI.pesquisaBanco(sistema);
+			BancoGUI.pesquisar(sistema);
 			break;
 		case 4: 
-			BancoGUI.excluiBanco(sistema);
+			BancoGUI.excluir(sistema);
 			break;
 		case 5:
-			BancoGUI.atualizaBanco(sistema);
+			BancoGUI.atualizar(sistema);
 			break;
 		case 6:
 			return;
@@ -322,7 +322,7 @@ public class GestaoMenus {
 		
 		switch (opcao) {
 		case 1:
-			ClienteGUI.criarNovoCliente(sistema);
+			ClienteGUI.criar(sistema);
 			break;
 		case 2:
 			System.out.println(sistema.listaClientes());
@@ -334,10 +334,10 @@ public class GestaoMenus {
 			ClienteGUI.pesquisar(sistema);
 			break;
 		case 4: 
-			ClienteGUI.excluiCliente(sistema);
+			ClienteGUI.excluir(sistema);
 			break;
 		case 5:
-			ClienteGUI.atualizaCliente(sistema);
+			ClienteGUI.atualizar(sistema);
 			break;
 		case 6:
 			return;
@@ -351,6 +351,78 @@ public class GestaoMenus {
 		
 	}
 
+	
+	
+	public void exibeMenuGerenciarContas() {
+		
+		int opcao=0;
+		Scanner leitura; 
+		String texto,tecla;
+
+		while (opcao!=6) {
+		
+		texto = "";
+			
+		// Limpa a tela
+		try {
+			LimpaConsole.limparTela();
+		} catch (IOException | InterruptedException e) {
+			JOptionPane.showMessageDialog(null, e);
+			
+		}
+		
+		
+		// Definição do layout do menu 
+		texto+= "\n== Gerenciar Contas ==\n\n";
+		texto+= "Escolha a opção desejada\n";
+		texto+= "1 - Nova conta\n";
+		texto+= "2 - Listar Contas \n";
+		texto+= "3 - Pesquisar contas\n";
+		texto+= "4 - Excluir conta\n";
+//		texto+= "5 - Atualizar conta\n";
+		texto+= "5 - Voltar ao menu anterior\n";
+		texto+= "6 - Sair\n";
+		texto+= "Sua opção: ";
+		
+		
+		// Impressão do menu
+		System.out.print(texto);
+		
+		
+		// Entrada do valor da opção
+		do {
+			leitura = new Scanner(System.in);
+			opcao = leitura.nextInt();
+		} while(opcao>6 || opcao<1);
+		
+		
+		switch (opcao) {
+		case 1:
+			ContaGUI.criar(sistema);
+			break;
+		case 2:
+			ContaGUI.listar(sistema);
+			break;
+		case 3: 
+			ContaGUI.pesquisar(sistema);
+			break;
+		case 4: 
+			ContaGUI.excluir(sistema);
+			break;
+
+		case 5:
+			return;
+		case 6:
+			System.out.println("\n\n >>> Sistema Finalizado!");
+			System.exit(0);
+			return;
+		}
+
+		}
+		
+	}
+	
+	
 	public void exibeMenuAcessoCliente() {
 		int opcao=0;
 		Scanner leitura; 

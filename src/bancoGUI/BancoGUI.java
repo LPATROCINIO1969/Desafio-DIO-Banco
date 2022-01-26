@@ -13,7 +13,7 @@ public class BancoGUI {
 	
 	
 	@SuppressWarnings("resource")
-	public static void criarNovoBanco(SistemaBancario sistema) {
+	public static void criarNovo(SistemaBancario sistema) {
 		
 		String nome="";
 		String tecla;
@@ -63,7 +63,7 @@ public class BancoGUI {
 	
 	
 	@SuppressWarnings("resource")
-	public static void pesquisaBanco(SistemaBancario sistema) {
+	public static void pesquisar(SistemaBancario sistema) {
 		String texto;
 		String tecla;
 		String confirmacao="S";
@@ -117,7 +117,7 @@ public class BancoGUI {
 	
 	
 	@SuppressWarnings("resource")
-	public static void excluiBanco(SistemaBancario sistema) {
+	public static void excluir(SistemaBancario sistema) {
 		String texto;
 		String tecla;
 		String confirmacao="S";
@@ -171,7 +171,7 @@ public class BancoGUI {
 	}
 	
 	@SuppressWarnings("resource")
-	public static void atualizaBanco(SistemaBancario sistema) {
+	public static void atualizar(SistemaBancario sistema) {
 	
 		String texto;
 		String nome="";

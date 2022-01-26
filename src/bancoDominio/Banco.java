@@ -23,6 +23,10 @@ public class Banco implements Comparable<Banco>{
 	}
 	
 	
+	public List<Agencia> getAgencias(){
+		return agencias;
+	}
+	
 	public void addAgencia(Agencia novaAgencia) {
 		this.agencias.add(novaAgencia);
 		this.numAgencia++;

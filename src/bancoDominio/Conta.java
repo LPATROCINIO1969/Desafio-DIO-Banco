@@ -14,6 +14,7 @@ public abstract class Conta implements iConta{
 	protected int tipoConta;
 	protected List<Transacao> transacoes;
 	
+	
 	public Conta(Cliente novoCliente, Agencia agencia) { 
 		this.agencia = agencia;
 		this.numero = SEQUENCIAL++; 
@@ -21,6 +22,7 @@ public abstract class Conta implements iConta{
 		this.cliente = novoCliente;
 		this.tipoConta=0;
 		this.agencia.addConta(this);
+		this.cliente.addConta(this);
 		this.transacoes = new ArrayList<>();
 		
 	}
@@ -41,7 +43,20 @@ public abstract class Conta implements iConta{
 	public int getTipoConta() {
 		return this.tipoConta;
 	}
+	
+	public int getProximoNumeroConta() {
+		return (this.SEQUENCIAL+1);
+	}
+	
+	public void excluir() {
+		this.cliente.removeConta(this);
+		this.agencia.removeConta(this);
+	}
 
+	public List<Transacao> getTransacoes(){
+		return this.transacoes;
+	}
+	
 	@Override
 	public void sacar(double valorSacado) {
 		this.transacoes.add(new Transacao("Saque", valorSacado,true, new Date()));
@@ -66,16 +81,19 @@ public abstract class Conta implements iConta{
 		
 	@Override
 	public String toString() {
-		return ("Conta " + this.getNumero() + " - " + this.cliente.getNome() + "Tipo: " + this.getTipoConta());
+		return ("Conta " + String.format("%04d", this.getNumero())  + " - " + String.format("%-20s", this.cliente.getNome()) + "\t- Tipo: " + String.format("%03d", this.getTipoConta()) );
 	}
 
 
-	protected void imprimirInfComum() {
-		System.out.println(String.format("Agencia: %d",this.agencia.getNumero()));
-		System.out.println(String.format("Conta: %d",this.numero));
-		System.out.println(String.format("Titular: %s",this.cliente.getNome()));
-		System.out.println(String.format("Saldo: %.2f",this.saldo));
+	public String dadosConta() {
+		String texto="";
+		texto += String.format("Agencia: %d",this.agencia.getNumero()) + "\n";
+		texto += String.format("Conta: %08d",this.numero) + "\n" ;
+		texto += String.format("Titular: %20s",this.cliente.getNome()) + "\n";
+		texto += String.format("Saldo: %.2f",this.saldo) + "\n";
+		return texto;
+	}
+	
 		
-	}
 	
 }

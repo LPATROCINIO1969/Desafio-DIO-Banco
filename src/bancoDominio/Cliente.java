@@ -86,5 +86,9 @@ public class Cliente implements Comparable<Cliente>{
 		return this.getNome().toUpperCase().compareTo(outroCliente.getNome().toUpperCase());
 	}
 	
+
+	public List<Conta> getContas(){
+		return contas;
+	}
 	
 }

@@ -11,7 +11,7 @@ import bancoDominio.SistemaBancario;
 public class ClienteGUI {
 
 	@SuppressWarnings("resource")
-	public static void criarNovoCliente(SistemaBancario sistema) {
+	public static void criar(SistemaBancario sistema) {
 		
 		String nome="";
 		String tecla;
@@ -125,7 +125,7 @@ public class ClienteGUI {
 	
 	
 	@SuppressWarnings("resource")
-	public static void excluiCliente(SistemaBancario sistema) {
+	public static void excluir(SistemaBancario sistema) {
 		String texto;
 		String tecla;
 		String confirmacao="S";
@@ -179,7 +179,7 @@ public class ClienteGUI {
 	}
 	
 	@SuppressWarnings("resource")
-	public static void atualizaCliente(SistemaBancario sistema) {
+	public static void atualizar(SistemaBancario sistema) {
 	
 		String texto;
 		String nome="";

@@ -33,7 +33,7 @@ public class Agencia {
 		this.qtdContas++;
 	}
 	
-	private void removeConta(Conta conta) {
+	public void removeConta(Conta conta) {
 		if (this.contas.isEmpty()) return;
 		this.contas.remove(conta);
 		this.qtdContas--;
@@ -73,6 +73,10 @@ public class Agencia {
 	public Banco getBanco() {
 		return this.banco;
 	}
+	
+	public List<Conta> getContas(){
+		return contas;
+	}
 
 	public void setNumero(int numero) {
 		this.numero = numero;
@@ -86,7 +90,7 @@ public class Agencia {
 	// retorna o nome e numero da agencia em uma String
 	@Override
 	public String toString() {
-		return ">>\t " +  numero + "\t -  Agencia: " + nome;
+		return ">\t " +  numero + "\t -  Agencia: " + nome;
 	}
 	
 	// Imprime a lista de CONTAS pertencentes a essa AGENCIA
@@ -97,7 +101,7 @@ public class Agencia {
 		if(contas.isEmpty()) return texto; 
 		
 		for(Conta conta:contas) {
-			texto+=conta.toString() + "\n";
+			texto+=">>\t\t\t"+conta.toString() + "\n";
 		}
 		return texto;
 	}

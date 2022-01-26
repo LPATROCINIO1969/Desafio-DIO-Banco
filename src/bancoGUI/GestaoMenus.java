@@ -59,7 +59,7 @@ public class GestaoMenus {
 			exibeMenuAdministracaoSistema();
 			break;
 		case 2:
-			exibeMenuAcessoCliente();
+			if(AcessoClienteGUI.iniciarAcesso(sistema)) exibeMenuAcessoCliente();
 			break;
 			
 		case 3: 
@@ -138,7 +138,6 @@ public class GestaoMenus {
 	public void exibeMenuGerenciarAgencias() {
 		int opcao=0;
 		Scanner leitura;
-		String tecla;
 		String texto;
 		
 		while (opcao!=6) {
@@ -281,7 +280,7 @@ public class GestaoMenus {
 		
 		int opcao=0;
 		Scanner leitura; 
-		String texto,tecla;
+		String texto;
 
 		while (opcao!=6) {
 		
@@ -328,7 +327,7 @@ public class GestaoMenus {
 			System.out.println(sistema.listaClientes());
 			System.out.println("Aperte qualquer tecla para continuar...");
 			leitura = new Scanner(System.in);
-			tecla = leitura.nextLine();
+			leitura.nextLine();
 			break;
 		case 3: 
 			ClienteGUI.pesquisar(sistema);
@@ -357,7 +356,7 @@ public class GestaoMenus {
 		
 		int opcao=0;
 		Scanner leitura; 
-		String texto,tecla;
+		String texto;
 
 		while (opcao!=6) {
 		
@@ -379,7 +378,6 @@ public class GestaoMenus {
 		texto+= "2 - Listar Contas \n";
 		texto+= "3 - Pesquisar contas\n";
 		texto+= "4 - Excluir conta\n";
-//		texto+= "5 - Atualizar conta\n";
 		texto+= "5 - Voltar ao menu anterior\n";
 		texto+= "6 - Sair\n";
 		texto+= "Sua opção: ";
@@ -442,7 +440,7 @@ public class GestaoMenus {
 		
 		
 		// Definição do layout do menu
-		texto+= "\n== Acesso do Cliente ==\n\n";
+		texto+= "\n== Acesso do Cliente: " + AcessoClienteGUI.getUsuario().getNome() + "  ==\n\n";
 		texto+= "Escolha a opção desejada\n";
 		texto+= "1 - Listar minhas contas bancárias\n";
 		texto+= "2 - Efetuar depósito\n";
@@ -466,23 +464,25 @@ public class GestaoMenus {
 		
 		switch (opcao) {
 		case 1:
-			// to do
+			AcessoClienteGUI.listarContas(sistema);
 			break;
 		case 2:
-			// to do
+			AcessoClienteGUI.depositar(sistema);
 			break;
 		case 3: 
-			// to do
+			AcessoClienteGUI.sacar(sistema);
 			break;
 		case 4: 
-			// to do
+			AcessoClienteGUI.transferir(sistema);
 			break;
 		case 5:
-			// to do
+			AcessoClienteGUI.emitirExtrato(sistema);
 			break;
 		case 6:
+			AcessoClienteGUI.encerrarAcesso();
 			return;
 		case 7:
+			AcessoClienteGUI.encerrarAcesso();
 			System.out.println("\n\n >>> Sistema Finalizado!");
 			System.exit(0);
 			return;

@@ -12,7 +12,7 @@ public class Cliente implements Comparable<Cliente>{
 
 		
 	public Cliente(String nome, String cpf, boolean tipoPessoa) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 		this.identificador= cpf;
 		this.flagPessoaFisica = tipoPessoa;
 		this.contas = new ArrayList<>();
@@ -63,14 +63,14 @@ public class Cliente implements Comparable<Cliente>{
 		}
 		
 		for(Conta conta:contas) {
-			texto+=conta.toString() + "\n";
+			texto+="\t"+conta.toString() + "\n";
 		}
 		return texto;
 	}
 	
 	@Override
 	public String toString() {
-		return (">\t " + String.format("%-20s",this.nome)+ " - CPF/CNPJ = " + String.format("%20s",this.identificador) + "\t - Tipo: "+ this.tipoPessoa());
+		return (String.format("%-20s",this.nome)+ " - CPF/CNPJ = " + String.format("%20s",this.identificador) + "\t - Tipo: "+ this.tipoPessoa());
 	}
 
 	
@@ -89,6 +89,13 @@ public class Cliente implements Comparable<Cliente>{
 
 	public List<Conta> getContas(){
 		return contas;
+	}
+	
+	public Conta getConta(int codigo) {
+		for (Conta conta:contas) {
+			if(conta.getNumero()== codigo)return conta;
+		}
+		return null;
 	}
 	
 }

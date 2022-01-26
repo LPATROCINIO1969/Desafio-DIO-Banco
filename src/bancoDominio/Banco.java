@@ -18,7 +18,7 @@ public class Banco implements Comparable<Banco>{
 	
 	public Banco(String nome, int numero) {
 		this();
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 		this.numero = numero;
 	}
 	

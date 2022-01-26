@@ -22,7 +22,7 @@ public class Agencia {
 	
 	public Agencia(String nome, int numero, Banco banco) {
 		this();
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 		this.numero = numero;
 		this.banco = banco;
 	}

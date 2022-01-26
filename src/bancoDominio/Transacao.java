@@ -1,10 +1,7 @@
 package bancoDominio;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.JOptionPane;
 
 public class Transacao {
 		private static int NUMERO = 1;
@@ -27,7 +24,7 @@ public class Transacao {
 			SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
 			String texto ="";
 			
-			texto += sd.format(this.data) + "\t" + this.operacao + "\t" +  String.format("%04d",this.numDoc) + "\t" + String.format("%6.2f", valor) + (flagDebito?"D":"C") + "\n"; 
+			texto += sd.format(this.data) + "\t" + String.format("%-12s",this.operacao) + "\t" +  String.format("%04d",this.numDoc) + "\t\t" + String.format("%8.2f", valor) + (flagDebito?"D":"C") + "\n"; 
 			return texto;
 
 		}

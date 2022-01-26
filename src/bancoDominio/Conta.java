@@ -45,7 +45,7 @@ public abstract class Conta implements iConta{
 	}
 	
 	public int getProximoNumeroConta() {
-		return (this.SEQUENCIAL+1);
+		return (Conta.SEQUENCIAL+1);
 	}
 	
 	public void excluir() {
@@ -81,19 +81,38 @@ public abstract class Conta implements iConta{
 		
 	@Override
 	public String toString() {
-		return ("Conta " + String.format("%04d", this.getNumero())  + " - " + String.format("%-20s", this.cliente.getNome()) + "\t- Tipo: " + String.format("%03d", this.getTipoConta()) );
+		return ("Conta " + String.format("%04d", this.getNumero())  + " - " + String.format("%-20s", this.cliente.getNome()) + "\t- Tipo: " + String.format("%03d", this.getTipoConta()) + "\t- Saldo:" + String.format("%.2f", this.saldo));
 	}
 
 
 	public String dadosConta() {
 		String texto="";
-		texto += String.format("Agencia: %d",this.agencia.getNumero()) + "\n";
+		texto += String.format("Banco: %04d",this.agencia.getBanco().getNumero()) + " - " + this.agencia.getBanco().getNome() +"\n";
+		texto += String.format("Agencia: %d",this.agencia.getNumero()) + " - " + this.agencia.getNome() + "\n";
 		texto += String.format("Conta: %08d",this.numero) + "\n" ;
-		texto += String.format("Titular: %20s",this.cliente.getNome()) + "\n";
-		texto += String.format("Saldo: %.2f",this.saldo) + "\n";
+		texto += String.format("Titular: %-20s",this.cliente.getNome()) + "\n";
+		texto += String.format("Saldo: R$ %.2f",this.saldo) + "\n";
 		return texto;
 	}
 	
-		
+	private String mostraMovimento() {
+		String texto="";
+		for(Transacao ts:this.transacoes) {
+			texto+=ts.toString();
+		}
+		return texto;
+	}
+	
+	
+	public String emitirExtrato() {
+		String texto="";
+		texto += dadosConta();
+		texto += "==================================================================================================\n";
+		texto += "Data" + "\t\tOperação" + "\tDocumento" + "\tValor\n";
+		texto += "==================================================================================================\n";
+		texto += mostraMovimento();
+		texto += "==================================================================================================\n";
+		return texto;
+	}
 	
 }
